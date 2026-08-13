@@ -8,7 +8,12 @@ from flask import Flask, request, jsonify  # For creating the Flask API
 superkart_predictor_api = Flask("SuperKart Predictor Sales")
 
 # Load the trained machine learning model
-model = joblib.load("../deployment_files/superkart_prediction_model_v1_0.joblib")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(
+    BASE_DIR,
+    "superkart_prediction_model_v1_0.joblib"
+)
+model = joblib.load(MODEL_PATH)
 
 # Define a route for the home page (GET request)
 @superkart_predictor_api.get('/')
@@ -55,8 +60,6 @@ def predict_product_sales_function():
 
     # Convert NumPy value to Python float
     predicted_sale = round(float(predicted_sale), 2)
-    # The conversion above is needed as we convert the model prediction to actual price using np.exp, which returns predictions as NumPy float32 values.
-    # When we send this value directly within a JSON response, Flask's jsonify function encounters a datatype error
 
     # Return prediction
     return jsonify({'Predicted Product Sold': predicted_sale})
@@ -89,7 +92,7 @@ def predict_product_sales_batch_function():
     output_dict = dict(zip(product_ids, predicted_sales))  # Use actual prices
 
     # Return the predictions dictionary as a JSON response
-    return output_dict
+    return jsonify(output_dict)
 
 # Run the Flask application in debug mode if this script is executed directly
 if __name__ == '__main__':
