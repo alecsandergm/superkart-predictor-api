@@ -95,3 +95,7 @@ def predict_product_sales_batch_function():
 
     # Return predictions as a JSON response
     return jsonify(predicted_sales)
+
+# Run the Flask application in debug mode if this script is executed directly
+if __name__ == '__main__':
+    rental_price_predictor_api.run(debug=True)    
