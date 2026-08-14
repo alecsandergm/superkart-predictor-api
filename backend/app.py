@@ -66,26 +66,20 @@ def predict_product_sales_function():
     return jsonify({'Predicted Product Sold': predicted_sale})
 
 
-# Define an endpoint for batch prediction (POST request)
 @superkart_predictor_api.post('/v1/salesbatch')
 def predict_product_sales_batch_function():
     """
-    Handles POST requests to the '/v1/salesbatch' endpoint.
-    Expects a CSV file containing multiple products
-    and returns predicted product sales as a JSON response.
+    Predict sales for multiple products from a CSV file.
     """
 
     # Get the uploaded CSV file
     file = request.files['file']
 
-    # Read the CSV file into a Pandas DataFrame
+    # Read CSV into DataFrame
     input_data = pd.read_csv(file)
 
-    # Select only the features used by the model
-    model_input = input_data[numeric_features + categorical_features]
-
     # Make predictions
-    predicted_product_sales = model.predict(model_input).tolist()
+    predicted_product_sales = model.predict(input_data)
 
     # Round predictions
     predicted_sales = [
@@ -93,7 +87,7 @@ def predict_product_sales_batch_function():
         for predicted_product_sale in predicted_product_sales
     ]
 
-    # Return predictions as a JSON response
+    # Return predictions as JSON
     return jsonify(predicted_sales)
 
 # Run the Flask application in debug mode if this script is executed directly
