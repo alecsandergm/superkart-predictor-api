@@ -3,6 +3,7 @@ import numpy as np
 import joblib  # For loading the serialized model
 import pandas as pd  # For data manipulation
 from flask import Flask, request, jsonify  # For creating the Flask API
+import os
 
 # Initialize the Flask application
 superkart_predictor_api = Flask("SuperKart Predictor Sales")
