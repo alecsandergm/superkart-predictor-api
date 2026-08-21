@@ -12,11 +12,11 @@ st.title("Superkart Product Sales Prediction")
 st.subheader("Online Prediction")
 
 # Collect user input for product features
-Product_Weight = st.number_input("Product Weight", min_value=4, max_value=9.99, step=0.1, value=4)
+Product_Weight = st.number_input("Product Weight", min_value=4.0, max_value=9.99, step=0.1, value=4.0)
 Product_Sugar_Content = st.selectbox("Product Sugar Content", ["Low Sugar", "No Sugar", "Regular"])
 Product_Allocated_Area = st.number_input("Product Allocated Area", min_value=0.004, max_value=0.298, step=0.001, value=0.100)
 Product_Type = st.selectbox("Product Type", ["Baking Goods","Breads","Breakfast","Canned","Dairy","Frozen Foods","Fruits and Vegetables","Hard Drinks","Health and Hygiene","Household","Meat","Others","Seafood","Snack Foods","Soft Drinks","Starchy Foods"])
-Product_MRP = st.number_input("Product MRP", min_value=31, max_value=254.34, step=0.01, value=31)
+Product_MRP = st.number_input("Product MRP", min_value=31.0, max_value=254.34, step=0.01, value=31.0)
 Store_Id =st.selectbox("Store Id", ["OUT001","OUT002","OUT003","OUT004"])
 Store_Establishment_Year =st.selectbox("Store Establishment",[1987, 1998, 1999, 2009])
 Store_Size = st.selectbox("Store Size",["High","Medium","Small"])
